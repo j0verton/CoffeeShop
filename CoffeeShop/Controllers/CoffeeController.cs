@@ -39,9 +39,9 @@ namespace CoffeeShop.Controllers
             return Ok(coffee);
         }
 
-        // POST api/<CoffeeController>
+        // https://localhost:5001/api/coffee/
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post(Coffee coffee)
         {
         }
 
