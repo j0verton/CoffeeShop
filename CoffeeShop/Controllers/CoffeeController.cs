@@ -1,4 +1,5 @@
-﻿using CoffeeShop.Repositories;
+﻿using CoffeeShop.Models;
+using CoffeeShop.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -43,18 +44,29 @@ namespace CoffeeShop.Controllers
         [HttpPost]
         public IActionResult Post(Coffee coffee)
         {
+            _coffeeRepository.Add(coffee);
+            return CreatedAtAction("Get", new { id = coffee.Id }, coffee);
         }
 
-        // PUT api/<CoffeeController>/5
+        // https://localhost:5001/api/coffee/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, Coffee coffee)
         {
+            if (id != coffee.Id)
+            {
+                return BadRequest();
+            }
+
+            _coffeeRepository.Update(coffee);
+            return NoContent();
         }
 
-        // DELETE api/<CoffeeController>/5
+        // https://localhost:5001/api/coffee/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            _coffeeRepository.Delete(id);
+            return NoContent();
         }
     }
 }
