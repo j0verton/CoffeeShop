@@ -1,5 +1,6 @@
-import { getAllBeanVarieties } from './VarietyProvider.js'
+import { addVariety, getAllBeanVarieties } from './VarietyProvider.js'
 import { VarietyHTML } from './Variety.js'
+import { addAVarietyForm } from './VarietyForm.js'
 const eventHub = document.querySelector("body")
 
 export const VarietyList = () => {
@@ -18,6 +19,14 @@ const render = () => {
     <div id=varietyContainer></div>
     `
 }
+
+
+const renderForm = () => {
+    const target = document.querySelector("#varietyContainer");
+    target.innerHTML = addAVarietyForm();
+
+}
+
 
 
 
@@ -46,6 +55,16 @@ eventHub.addEventListener("click", e => {
 
 eventHub.addEventListener("click", e => {
     const varietyTarget = document.getElementById("varietyContainer")
+    const varietyButton = document.querySelector("#allVariety-button")
+
+    if (e.target === document.querySelector("#addVariety-button")) {
+        console.log("add click")
+        renderForm()
+    }
+})
+
+eventHub.addEventListener("click", e => {
+    const varietyTarget = document.getElementById("varietyContainer")
     if (e.target.id.startsWith('editVariety')) {
 
         console.log("edit click")
@@ -60,4 +79,27 @@ eventHub.addEventListener("click", e => {
 
     }
 })
+
+eventHub.addEventListener("click", e => {
+    const varietyTarget = document.getElementById("varietyContainer")
+    if (e.target.id === 'submitVariety') {
+        const name = document.getElementById('variety-name')
+        const region = document.getElementById('variety-region')
+        const notes = document.getElementById('variety-notes')
+
+        //stubbed in for creating an edit later
+
+        const id = ""
+        if (id.value) { }
+
+        const newVarietyObj = {
+            name: name.value,
+            region: region.value,
+            notes: notes.value
+
+        }
+        addVariety(newVarietyObj);
+    }
+})
+
 
