@@ -1,14 +1,11 @@
-﻿const url = "https://localhost:5001/api/beanvariety/";
+﻿import { VarietyList } from './Scripts/Variety/VarietyList.js'
+VarietyList()
 
-const button = document.querySelector("#allVariety-button");
-button.addEventListener("click", () => {
-    getAllBeanVarieties()
-        .then(beanVarieties => {
-            console.log(beanVarieties);
-        })
-});
 
-function getAllBeanVarieties() {
-    return fetch(url).then(resp => resp.json());
-}
+
+
+
+
+
+
 
