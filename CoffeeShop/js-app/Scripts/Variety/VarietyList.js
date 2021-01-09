@@ -2,9 +2,6 @@ import { getAllBeanVarieties } from './VarietyProvider.js'
 import { VarietyHTML } from './Variety.js'
 const eventHub = document.querySelector("body")
 
-// let varietyTarget = document.getElementById("varietyContainer")
-
-
 export const VarietyList = () => {
     render()
 
@@ -13,7 +10,11 @@ export const VarietyList = () => {
 
 const render = () => {
     const target = document.querySelector("#variety-section")
-    target.innerHTML = `<button id="allVariety-button" class="show">View Our Bean Varieties</button>
+    target.innerHTML = `
+    <div id="variety-buttonContainer">
+        <button id="allVariety-button" class="show">View Our Bean Varieties</button>
+        <button id="addVariety-button" >Add A Bean Varieties</button>
+    </div>
     <div id=varietyContainer></div>
     `
 }
@@ -43,4 +44,20 @@ eventHub.addEventListener("click", e => {
 
 })
 
+eventHub.addEventListener("click", e => {
+    const varietyTarget = document.getElementById("varietyContainer")
+    if (e.target.id.startsWith('editVariety')) {
+
+        console.log("edit click")
+
+    }
+})
+
+eventHub.addEventListener("click", e => {
+    const varietyTarget = document.getElementById("varietyContainer")
+    if (e.target.id.startsWith('deleteVariety')) {
+        console.log("delete click")
+
+    }
+})
 

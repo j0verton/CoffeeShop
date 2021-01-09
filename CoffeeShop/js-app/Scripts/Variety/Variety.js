@@ -6,6 +6,8 @@ export const VarietyHTML = (varietyObj) => {
                     ${varietyObj.region}
                 </h5>
                 <p>${varietyObj.notes}</p>
+                <button id="editVariety--${varietyObj.id}">Edit Variety</button>
+                <button id="deleteVariety--${varietyObj.id}">Delete Variety</button>
         </div>
 
 `
