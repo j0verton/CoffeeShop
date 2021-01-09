@@ -1,4 +1,4 @@
-import { addVariety, getAllBeanVarieties } from './VarietyProvider.js'
+import { addVariety, getAllBeanVarieties, deleteVariety } from './VarietyProvider.js'
 import { VarietyHTML } from './Variety.js'
 import { addAVarietyForm } from './VarietyForm.js'
 const eventHub = document.querySelector("body")
@@ -72,14 +72,22 @@ eventHub.addEventListener("click", e => {
     }
 })
 
+//DELETE
 eventHub.addEventListener("click", e => {
     const varietyTarget = document.getElementById("varietyContainer")
     if (e.target.id.startsWith('deleteVariety')) {
-        console.log("delete click")
+        const [prefix, id] = e.target.id.split("--")
+        deleteVariety(id)
+        //.then(() => {
+        //need to rerender list
+        //})
+
 
     }
 })
 
+
+//SUMBIT
 eventHub.addEventListener("click", e => {
     const varietyTarget = document.getElementById("varietyContainer")
     if (e.target.id === 'submitVariety') {

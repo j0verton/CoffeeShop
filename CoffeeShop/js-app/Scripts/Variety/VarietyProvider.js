@@ -13,4 +13,11 @@ export const addVariety = varietyObj => {
         },
         body: JSON.stringify(varietyObj)
     })
-} 
+}
+
+export const deleteVariety = (id) => {
+    return fetch(`${url}${id}`, {
+        method: 'DELETE'
+    })
+
+}
