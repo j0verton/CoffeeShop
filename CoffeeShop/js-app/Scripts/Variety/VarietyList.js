@@ -1,8 +1,8 @@
 import { getAllBeanVarieties } from './VarietyProvider.js'
-
+import { VarietyHTML } from './Variety.js'
 const eventHub = document.querySelector("body")
 
-const varietyTarget = document.getElementById("varietyContainer")
+// let varietyTarget = document.getElementById("varietyContainer")
 
 
 export const VarietyList = () => {
@@ -13,7 +13,7 @@ export const VarietyList = () => {
 
 const render = () => {
     const target = document.querySelector("#variety-section")
-    target.innerHTML = `<button id="allVariety-button">View Our Bean Varieties</button>
+    target.innerHTML = `<button id="allVariety-button" class="show">View Our Bean Varieties</button>
     <div id=varietyContainer></div>
     `
 }
@@ -21,9 +21,26 @@ const render = () => {
 
 
 eventHub.addEventListener("click", e => {
-    if (e.target === document.querySelector("#allVariety-button"))
+    const varietyTarget = document.getElementById("varietyContainer")
+    const varietyButton = document.querySelector("#allVariety-button")
+
+    if (e.target === document.querySelector("#allVariety-button") && varietyButton.classList.contains("show")) {
+
         getAllBeanVarieties()
             .then(beanVarieties => {
                 varietyTarget.innerHTML = beanVarieties.map(bean => VarietyHTML(bean)).join("");
             })
-});
+
+        varietyButton.textContent = "Hide List"
+        varietyButton.classList.remove("show")
+
+    } else if (e.target === document.querySelector("#allVariety-button") && !varietyButton.classList.contains("show")) {
+        varietyTarget.innerHTML = "";
+        varietyButton.textContent = "View Our Bean Varieties";
+        varietyButton.classList.add("show");
+
+    }
+
+})
+
+
