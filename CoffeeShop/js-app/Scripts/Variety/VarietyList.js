@@ -1,34 +1,31 @@
-import { addVariety, getAllBeanVarieties, deleteVariety } from './VarietyProvider.js'
+import { addVariety, getAllBeanVarieties, deleteVariety, useVarieties, getVariety } from './VarietyProvider.js'
 import { VarietyHTML } from './Variety.js'
 import { addAVarietyForm } from './VarietyForm.js'
+import { VarietySelect } from './VarietySelect.js'
 const eventHub = document.querySelector("body")
 
 export const VarietyList = () => {
     render()
-
-
 }
 
 const render = () => {
-    const target = document.querySelector("#variety-section")
-    target.innerHTML = `
+    getAllBeanVarieties().then(() => {
+        const target = document.querySelector("#variety-section")
+        target.innerHTML = `
     <div id="variety-buttonContainer">
         <button id="allVariety-button" class="show">View Our Bean Varieties</button>
+        ${VarietySelect(useVarieties())}
         <button id="addVariety-button" >Add A Bean Varieties</button>
     </div>
     <div id=varietyContainer></div>
     `
+    })
 }
-
 
 const renderForm = () => {
     const target = document.querySelector("#varietyContainer");
     target.innerHTML = addAVarietyForm();
-
 }
-
-
-
 
 eventHub.addEventListener("click", e => {
     const varietyTarget = document.getElementById("varietyContainer")
@@ -37,6 +34,7 @@ eventHub.addEventListener("click", e => {
     if (e.target === document.querySelector("#allVariety-button") && varietyButton.classList.contains("show")) {
 
         getAllBeanVarieties()
+            .then(() => useVarieties())
             .then(beanVarieties => {
                 varietyTarget.innerHTML = beanVarieties.map(bean => VarietyHTML(bean)).join("");
             })
@@ -94,7 +92,6 @@ eventHub.addEventListener("click", e => {
         const name = document.getElementById('variety-name')
         const region = document.getElementById('variety-region')
         const notes = document.getElementById('variety-notes')
-
         //stubbed in for creating an edit later
 
         const id = ""
@@ -104,9 +101,20 @@ eventHub.addEventListener("click", e => {
             name: name.value,
             region: region.value,
             notes: notes.value
-
         }
         addVariety(newVarietyObj);
+    }
+})
+
+eventHub.addEventListener("change", changeEvent => {
+    const target = document.querySelector("#varietyContainer");
+    if (changeEvent.target.id === "varietySelect") {
+        const selectedVariety = changeEvent.target.value
+        console.log(selectedVariety)
+        getVariety(selectedVariety).then(bean => {
+            console.log(bean, "bean")
+            target.innerHTML = VarietyHTML(bean)
+        })
     }
 })
 
