@@ -1,4 +1,4 @@
-import { addVariety, getAllBeanVarieties, deleteVariety, useVarieties, getVariety } from './VarietyProvider.js'
+import { addVariety, getAllBeanVarieties, deleteVariety, useVarieties, getVariety, editVariety } from './VarietyProvider.js'
 import { VarietyHTML } from './Variety.js'
 import { VarietyForm } from './VarietyForm.js'
 import { VarietySelect } from './VarietySelect.js'
@@ -97,7 +97,6 @@ eventHub.addEventListener("click", e => {
         const notes = document.getElementById('variety-notes')
         const id = document.getElementById('variety-id')
         console.log(id)
-        debugger;
         if (id) {
             const updateObj = {
                 id: id.value,

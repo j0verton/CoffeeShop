@@ -41,12 +41,13 @@ export const deleteVariety = (id) => {
 
 
 export const editVariety = (beanObj) => {
+    debugger
     return fetch(`${url}${beanObj.id}`, {
         method: 'PUT',
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(artObj)
+        body: JSON.stringify(beanObj)
     })
         .then(getAllBeanVarieties)
         .then(dispatchStateChangeEvent)
