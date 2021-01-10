@@ -1,4 +1,5 @@
 import { CoffeeHTML } from "./Coffee.js"
+import { CoffeeForm } from "./CoffeeForm.js"
 import { OrderSelect } from "./CoffeeSelect.js"
 import { getOrder, getOrderHistory, useOrderHistory } from "./CoffeProvider.js"
 
@@ -7,7 +8,6 @@ const eventHub = document.querySelector("body")
 const target = document.querySelector("#coffee-section")
 
 export async function CoffeeList() {
-
     target.innerHTML = await render()
 }
 
@@ -18,11 +18,14 @@ const render = () => {
         ${OrderSelect(useOrderHistory())}
         <button id="addCoffee-button" class="btn btn-secondary">Order a Coffee</button>
     </div>
-    <div id=coffeeContainer></div>
-    `
+    <div id=coffeeContainer></div>`
         return HTML
     })
+}
 
+const renderForm = (coffeeObj) => {
+    const ctarget = document.querySelector("#coffeeContainer");
+    ctarget.innerHTML = CoffeeForm(coffeeObj);
 }
 
 //toggles the view all coffees view and button
@@ -61,8 +64,6 @@ eventHub.addEventListener("click", e => {
         })
     }
 })
-
-
 
 //ADD Order
 eventHub.addEventListener("click", e => {
