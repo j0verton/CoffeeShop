@@ -88,7 +88,7 @@ namespace CoffeeShop.Repositories
             }
         }
 
-        public void Add(BeanVariety variety)
+        public BeanVariety Add(BeanVariety variety)
         {
             using (var conn = Connection)
             {
@@ -111,6 +111,7 @@ namespace CoffeeShop.Repositories
                     }
 
                     variety.Id = (int)cmd.ExecuteScalar();
+                    return variety;
                 }
             }
         }

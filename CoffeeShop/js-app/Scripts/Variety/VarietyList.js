@@ -13,9 +13,9 @@ const render = () => {
         const target = document.querySelector("#variety-section")
         target.innerHTML = `
     <div id="variety-buttonContainer">
-        <button id="allVariety-button" class="show">View Our Bean Varieties</button>
+        <button id="allVariety-button" class="show btn btn-secondary">View Our Bean Varieties</button>
         ${VarietySelect(useVarieties())}
-        <button id="addVariety-button" >Add A Bean Varieties</button>
+        <button id="addVariety-button" class="btn btn-secondary">Add A Bean Varieties</button>
     </div>
     <div id=varietyContainer></div>
     `
@@ -27,6 +27,23 @@ const renderForm = (beanObj) => {
     target.innerHTML = VarietyForm(beanObj);
 }
 
+eventHub.addEventListener("varietyStateChanged", e => {
+    if (e.detail.method === "delete") {
+        render()
+    } else if (e.detail.method === "edit") {
+        debugger
+        render().then(() => {
+            getVariety(e.detail.id).then(bean => {
+                target.innerHTML = VarietyHTML(bean)
+            })
+        })
+    }
+
+
+
+})
+
+//toggles the view all varieties view and button
 eventHub.addEventListener("click", e => {
     const varietyTarget = document.getElementById("varietyContainer")
     const varietyButton = document.querySelector("#allVariety-button")
@@ -104,7 +121,6 @@ eventHub.addEventListener("click", e => {
                 region: region.value,
                 notes: notes.value
             }
-            debugger
             editVariety(updateObj);
         } else {
 
@@ -113,13 +129,13 @@ eventHub.addEventListener("click", e => {
                 region: region.value,
                 notes: notes.value
             }
-            debugger
 
             addVariety(newVarietyObj);
         }
     }
 })
 
+//
 eventHub.addEventListener("change", changeEvent => {
     const target = document.querySelector("#varietyContainer");
     if (changeEvent.target.id === "varietySelect") {

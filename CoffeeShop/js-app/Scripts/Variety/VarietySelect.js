@@ -2,14 +2,18 @@ const eventHub = document.querySelector("body")
 
 export const VarietySelect = varietiesArray => {
     return `
-        <select class="dropdown" id="varietySelect">
-            <option value="0">Please select a Bean Variety</option>
+        <div class="dropdown" id="varietySelect">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Please select a Bean Variety
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
             ${varietiesArray.map(
         vObj => {
-            return `<option value="${vObj.id}">${vObj.name}</option>`;
+            return `<button class="dropdown-item" type="button" value="${vObj.id}">${vObj.name}</button>`;
         }
     )}
-        </select>
+    </div>
+    </div>
     `
 }
 

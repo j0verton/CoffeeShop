@@ -4,8 +4,14 @@ let varieties = []
 
 const eventHub = document.querySelector("body")
 
-const dispatchStateChangeEvent = () => {
-    const varietyStageChangedEvent = new CustomEvent('varietyStateChanged')
+const dispatchStateChangeEvent = (method, id) => {
+    console.log(method, id)
+    const varietyStageChangedEvent = new CustomEvent('varietyStateChanged', {
+        detail: {
+            id: id,
+            method: method
+        }
+    })
     eventHub.dispatchEvent(varietyStageChangedEvent)
 }
 export function getAllBeanVarieties() {
@@ -22,13 +28,20 @@ export const getVariety = (id) => {
 }
 
 export const addVariety = varietyObj => {
+
+
+    // i was trying to get this to return the object so i can render it.  not sure why its not working
     return fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(varietyObj)
-    }).then(dispatchStateChangeEvent)
+    }).then(resp => resp.json())
+        .then(res => {
+            console.log(res)
+            dispatchStateChangeEvent("add", res.id)
+        })
 }
 
 export const deleteVariety = (id) => {
@@ -36,12 +49,11 @@ export const deleteVariety = (id) => {
         method: 'DELETE'
     })
         .then(getAllBeanVarieties)
-        .then(dispatchStateChangeEvent)
+        .then(dispatchStateChangeEvent("delete"))
 }
 
 
 export const editVariety = (beanObj) => {
-    debugger
     return fetch(`${url}${beanObj.id}`, {
         method: 'PUT',
         headers: {
@@ -50,7 +62,7 @@ export const editVariety = (beanObj) => {
         body: JSON.stringify(beanObj)
     })
         .then(getAllBeanVarieties)
-        .then(dispatchStateChangeEvent)
+        .then(dispatchStateChangeEvent("edit", beanObj.id))
 }
 
 
