@@ -17,6 +17,5 @@ export const VarietyForm = (beanObj) => {
         <input type="text" id="variety-notes" placeholder="New Variety Notes"></input>
         <button id="submitVariety">Add This Variety</button>
         </form>`
-
     }
 }
