@@ -9,7 +9,7 @@ export const VarietySelect = varietiesArray => {
         <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
             ${varietiesArray.map(
         vObj => {
-            return `<button class="dropdown-item" type="button" value="${vObj.id}">${vObj.name}</button>`;
+            return `<option class="dropdown-item" type="button" id="VarietySelectOption--${vObj.id}" value="${vObj.id}">${vObj.name}</option>`;
         }
     )}
     </div>

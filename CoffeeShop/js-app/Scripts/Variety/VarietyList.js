@@ -8,7 +8,7 @@ export const VarietyList = () => {
     render()
 }
 
-const render = () => {
+async function render() {
     getAllBeanVarieties().then(() => {
         const target = document.querySelector("#variety-section")
         target.innerHTML = `
@@ -29,7 +29,15 @@ const renderForm = (beanObj) => {
 
 eventHub.addEventListener("varietyStateChanged", e => {
     if (e.detail.method === "delete") {
-        render()
+        let await render()
+
+        getAllBeanVarieties()
+            .then(() => useVarieties())
+            .then(beanVarieties => {
+                varietyTarget.innerHTML = beanVarieties.map(bean => VarietyHTML(bean)).join("");
+
+
+            })
     } else if (e.detail.method === "edit") {
         debugger
         render().then(() => {
@@ -136,13 +144,12 @@ eventHub.addEventListener("click", e => {
 })
 
 //
-eventHub.addEventListener("change", changeEvent => {
+eventHub.addEventListener("click", e => {
     const target = document.querySelector("#varietyContainer");
-    if (changeEvent.target.id === "varietySelect") {
-        const selectedVariety = changeEvent.target.value
+    if (e.target.id.startsWith("VarietySelectOption")) {
+        const selectedVariety = e.target.value
         console.log(selectedVariety)
         getVariety(selectedVariety).then(bean => {
-            console.log(bean, "bean")
             target.innerHTML = VarietyHTML(bean)
         })
     }
