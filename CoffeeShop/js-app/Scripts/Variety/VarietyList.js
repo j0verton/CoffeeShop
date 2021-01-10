@@ -8,7 +8,7 @@ export const VarietyList = () => {
     render()
 }
 
-async function render() {
+const render = () => {
     getAllBeanVarieties().then(() => {
         const target = document.querySelector("#variety-section")
         target.innerHTML = `
@@ -28,23 +28,26 @@ const renderForm = (beanObj) => {
 }
 
 eventHub.addEventListener("varietyStateChanged", e => {
+    console.log(e)
     if (e.detail.method === "delete") {
-        let await render()
-
-        getAllBeanVarieties()
-            .then(() => useVarieties())
-            .then(beanVarieties => {
-                varietyTarget.innerHTML = beanVarieties.map(bean => VarietyHTML(bean)).join("");
-
-
-            })
+        render()
+        // .then(() => {
+        //     getAllBeanVarieties()
+        //         .then(() => useVarieties())
+        //         .then(beanVarieties => {
+        //             varietyTarget.innerHTML = beanVarieties.map(bean => VarietyHTML(bean)).join("");
+        // })
+        // })
     } else if (e.detail.method === "edit") {
-        debugger
-        render().then(() => {
-            getVariety(e.detail.id).then(bean => {
-                target.innerHTML = VarietyHTML(bean)
-            })
-        })
+        render()
+        // .then(() => {
+        //     getVariety(e.detail.id).then(bean => {
+        //         target.innerHTML = VarietyHTML(bean)
+        //     })
+        // })
+    } else if (e.detail.method === "add") {
+
+        render()
     }
 
 

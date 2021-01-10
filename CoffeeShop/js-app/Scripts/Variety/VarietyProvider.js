@@ -5,7 +5,6 @@ let varieties = []
 const eventHub = document.querySelector("body")
 
 const dispatchStateChangeEvent = (method, id) => {
-    console.log(method, id)
     const varietyStageChangedEvent = new CustomEvent('varietyStateChanged', {
         detail: {
             id: id,
@@ -14,6 +13,7 @@ const dispatchStateChangeEvent = (method, id) => {
     })
     eventHub.dispatchEvent(varietyStageChangedEvent)
 }
+
 export function getAllBeanVarieties() {
     return fetch(url)
         .then(resp => resp.json())
@@ -37,11 +37,13 @@ export const addVariety = varietyObj => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(varietyObj)
-    }).then(resp => resp.json())
-        .then(res => {
-            console.log(res)
-            dispatchStateChangeEvent("add", res.id)
-        })
+    }).then(dispatchStateChangeEvent("add", varietyObj.name)
+        // .then(resp => resp.json())
+        //     .then(res => {
+        //         console.log(res)
+        //         dispatchStateChangeEvent("add", res.id)
+        //     })
+    )
 }
 
 export const deleteVariety = (id) => {
