@@ -63,3 +63,33 @@ eventHub.addEventListener("click", e => {
 })
 
 
+
+//ADD Order
+eventHub.addEventListener("click", e => {
+    const coffeeTarget = document.getElementById("coffeeContainer")
+    const coffee = document.querySelector("#allCoffee-button")
+    if (e.target === document.querySelector("#addCoffee-button")) {
+        console.log("add click")
+        renderForm()
+    }
+})
+//EDIT variety 
+eventHub.addEventListener("click", e => {
+    const coffeeTarget = document.getElementById("coffeeContainer")
+    if (e.target.id.startsWith('editCoffee')) {
+        const [prefix, id] = e.target.id.split("--")
+        getOrder(id).then(coffee =>
+            renderForm(coffee)
+        )
+        console.log("edit click")
+    }
+})
+
+//DELETE
+eventHub.addEventListener("click", e => {
+    const coffeeTarget = document.getElementById("coffeeContainer")
+    if (e.target.id.startsWith('deleteCoffee')) {
+        const [prefix, id] = e.target.id.split("--")
+        deleteOrder(id)
+    }
+})
