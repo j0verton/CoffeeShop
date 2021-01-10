@@ -50,7 +50,7 @@ eventHub.addEventListener("click", e => {
     }
 
 })
-
+//ADD Variety
 eventHub.addEventListener("click", e => {
     const varietyTarget = document.getElementById("varietyContainer")
     const varietyButton = document.querySelector("#allVariety-button")
@@ -60,15 +60,17 @@ eventHub.addEventListener("click", e => {
         renderForm()
     }
 })
-
+//EDIT variety 
 eventHub.addEventListener("click", e => {
     const varietyTarget = document.getElementById("varietyContainer")
     if (e.target.id.startsWith('editVariety')) {
+        const [prefix, id] = e.target.id.split("--")
 
         console.log("edit click")
 
     }
 })
+//
 
 //DELETE
 eventHub.addEventListener("click", e => {
@@ -92,11 +94,16 @@ eventHub.addEventListener("click", e => {
         const name = document.getElementById('variety-name')
         const region = document.getElementById('variety-region')
         const notes = document.getElementById('variety-notes')
-        //stubbed in for creating an edit later
-
-        const id = ""
-        if (id.value) { }
-
+        const id = document.getElementById('variety-id')
+        if (id.value) {
+            const updateObj = {
+                id: id.value,
+                name: name.value,
+                region: region.value,
+                notes: notes.value
+            }
+            editVariety(updateObj);
+        }
         const newVarietyObj = {
             name: name.value,
             region: region.value,

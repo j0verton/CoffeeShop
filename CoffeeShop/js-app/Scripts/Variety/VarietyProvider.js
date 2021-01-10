@@ -34,14 +34,25 @@ export const addVariety = varietyObj => {
 export const deleteVariety = (id) => {
     return fetch(`${url}${id}`, {
         method: 'DELETE'
-    }).then(dispatchStateChangeEvent)
+    })
+        .then(getAllBeanVarieties)
+        .then(dispatchStateChangeEvent)
 }
+
+
+export const editVariety = (beanObj) => {
+    return fetch(`${url}${beanObj.id}`, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(artObj)
+    })
+        .then(getAllBeanVarieties)
+        .then(dispatchStateChangeEvent)
+}
+
 
 export const useVarieties = () => {
     return varieties.slice()
-}
-
-export const editVariety = (beanObj) => {
-    return fetch(`${url}${}`)
-        .then(dispatchStateChangeEvent)
 }
