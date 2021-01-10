@@ -1,6 +1,6 @@
 import { addVariety, getAllBeanVarieties, deleteVariety, useVarieties, getVariety } from './VarietyProvider.js'
 import { VarietyHTML } from './Variety.js'
-import { addAVarietyForm } from './VarietyForm.js'
+import { VarietyForm } from './VarietyForm.js'
 import { VarietySelect } from './VarietySelect.js'
 const eventHub = document.querySelector("body")
 
@@ -22,9 +22,9 @@ const render = () => {
     })
 }
 
-const renderForm = () => {
+const renderForm = (beanObj) => {
     const target = document.querySelector("#varietyContainer");
-    target.innerHTML = addAVarietyForm();
+    target.innerHTML = VarietyForm(beanObj);
 }
 
 eventHub.addEventListener("click", e => {
@@ -54,7 +54,6 @@ eventHub.addEventListener("click", e => {
 eventHub.addEventListener("click", e => {
     const varietyTarget = document.getElementById("varietyContainer")
     const varietyButton = document.querySelector("#allVariety-button")
-
     if (e.target === document.querySelector("#addVariety-button")) {
         console.log("add click")
         renderForm()
@@ -65,7 +64,9 @@ eventHub.addEventListener("click", e => {
     const varietyTarget = document.getElementById("varietyContainer")
     if (e.target.id.startsWith('editVariety')) {
         const [prefix, id] = e.target.id.split("--")
-
+        getVariety(id).then(bean =>
+            renderForm(bean)
+        )
         console.log("edit click")
 
     }
@@ -95,21 +96,28 @@ eventHub.addEventListener("click", e => {
         const region = document.getElementById('variety-region')
         const notes = document.getElementById('variety-notes')
         const id = document.getElementById('variety-id')
-        if (id.value) {
+        console.log(id)
+        debugger;
+        if (id) {
             const updateObj = {
                 id: id.value,
                 name: name.value,
                 region: region.value,
                 notes: notes.value
             }
+            debugger
             editVariety(updateObj);
+        } else {
+
+            const newVarietyObj = {
+                name: name.value,
+                region: region.value,
+                notes: notes.value
+            }
+            debugger
+
+            addVariety(newVarietyObj);
         }
-        const newVarietyObj = {
-            name: name.value,
-            region: region.value,
-            notes: notes.value
-        }
-        addVariety(newVarietyObj);
     }
 })
 
