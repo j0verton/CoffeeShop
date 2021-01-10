@@ -28,8 +28,6 @@ export const getVariety = (id) => {
 }
 
 export const addVariety = varietyObj => {
-
-
     // i was trying to get this to return the object so i can render it.  not sure why its not working
     return fetch(url, {
         method: 'POST',
@@ -54,7 +52,6 @@ export const deleteVariety = (id) => {
         .then(dispatchStateChangeEvent("delete"))
 }
 
-
 export const editVariety = (beanObj) => {
     return fetch(`${url}${beanObj.id}`, {
         method: 'PUT',
@@ -66,7 +63,6 @@ export const editVariety = (beanObj) => {
         .then(getAllBeanVarieties)
         .then(dispatchStateChangeEvent("edit", beanObj.id))
 }
-
 
 export const useVarieties = () => {
     return varieties.slice()

@@ -3,3 +3,8 @@ display: flex !important;
 flex-direction: row !important;
 justify-content: space-around !important
 }
+
+body {
+    background-image: url(main.css)  no-repeat !important;
+    background-color: #493437;
+   }

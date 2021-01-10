@@ -12,7 +12,7 @@ const render = () => {
     getAllBeanVarieties().then(() => {
         const target = document.querySelector("#variety-section")
         target.innerHTML = `
-    <div id="variety-buttonContainer">
+    <div id="variety-buttonContainer" class="d-flex flex-row justify-content-around">
         <button id="allVariety-button" class="show btn btn-secondary">View Our Bean Varieties</button>
         ${VarietySelect(useVarieties())}
         <button id="addVariety-button" class="btn btn-secondary">Add A Bean Varieties</button>
@@ -146,7 +146,7 @@ eventHub.addEventListener("click", e => {
     }
 })
 
-//
+// select
 eventHub.addEventListener("click", e => {
     const target = document.querySelector("#varietyContainer");
     if (e.target.id.startsWith("VarietySelectOption")) {
