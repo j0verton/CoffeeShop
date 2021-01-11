@@ -1,7 +1,7 @@
 import { CoffeeHTML } from "./Coffee.js"
 import { CoffeeForm } from "./CoffeeForm.js"
 import { OrderSelect } from "./CoffeeSelect.js"
-import { getOrder, getOrderHistory, useOrderHistory } from "./CoffeProvider.js"
+import { editOrder, getOrder, getOrderHistory, order, useOrderHistory } from "./CoffeProvider.js"
 
 const eventHub = document.querySelector("body")
 
@@ -93,4 +93,32 @@ eventHub.addEventListener("click", e => {
         const [prefix, id] = e.target.id.split("--")
         deleteOrder(id)
     }
+})
+
+//SUBMIT
+eventHub.addEventListener("click", e => {
+    const coffeeTarget = document.getElementById("coffeeContainer")
+    if (e.target.id === 'submitCoffee') {
+        debugger
+        const title = document.getElementById('coffee-title')
+        const beanId = document.getElementById('varietySelectorig')
+        const id = document.getElementById('coffee-id')
+        if (id) {
+            const updateObj = {
+                id: id.value,
+                title: title.value,
+                beanId: beanId.value
+            }
+            editOrder(updateObj);
+
+        } else {
+            const newOrderObj = {
+                title: title.value,
+                beanId: beanId.value
+            }
+            order(newOrderObj);
+        }
+
+    }
+
 })

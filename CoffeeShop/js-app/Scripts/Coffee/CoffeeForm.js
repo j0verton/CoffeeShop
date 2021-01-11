@@ -1,5 +1,5 @@
 import { useVarieties } from "../Variety/VarietyProvider.js"
-import { VarietySelect } from "../Variety/VarietySelect.js"
+import { VarietySelectOrig } from "../Variety/VarietySelect.js"
 
 export const CoffeeForm = (coffeeObj) => {
     const varieties = useVarieties()
@@ -8,8 +8,8 @@ export const CoffeeForm = (coffeeObj) => {
         <div class="form-group">
             <form id="addACoffee-form">
                 <input type="hidden" name="id" id="coffee-id" value="${coffeeObj.id}">
-                <input type="text" id="coffee-name" value="${coffeeObj.title}">${coffeeObj.name}</input>
-                ${VarietySelect(varieties)}
+                <input type="text" id="coffee-title" value="${coffeeObj.title}">${coffeeObj.name}</input>
+                ${VarietySelectOrig(varieties)}
                 <button id="submitCoffee">Edit This Coffee</button>
             </form>
         </div>`
@@ -18,8 +18,8 @@ export const CoffeeForm = (coffeeObj) => {
         <div class="form-group>
             <form id="addACoffee-form">
                 <input type="hidden" name="id" id="id">
-                <input type="text" id="coffee-name" placeholder="Coffee Type"></input>
-                ${VarietySelect(varieties)}
+                <input type="text" id="coffee-title" placeholder="Coffee Type"></input>
+                ${VarietySelectOrig(varieties)}
                 <button id="submitCoffee">Order This Coffee</button>
             </form>
         </div>`

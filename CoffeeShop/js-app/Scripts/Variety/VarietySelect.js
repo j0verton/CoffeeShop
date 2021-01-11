@@ -17,3 +17,16 @@ export const VarietySelect = varietiesArray => {
     `
 }
 
+export const VarietySelectOrig = varietiesArray => {
+    return `
+        <select class="dropdown" id="varietySelectorig">
+            <option value="0">Please select a Bean Variety</option>
+            ${varietiesArray.map(
+        vObj => {
+            return `<option value="${vObj.id}">${vObj.name}</option>`;
+        }
+    )}
+        </select>
+    `
+}
+
