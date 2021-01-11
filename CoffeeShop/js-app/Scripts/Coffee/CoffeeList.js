@@ -107,14 +107,14 @@ eventHub.addEventListener("click", e => {
             const updateObj = {
                 id: id.value,
                 title: title.value,
-                beanId: beanId.value
+                beanVarietyId: beanId.value
             }
             editOrder(updateObj);
 
         } else {
             const newOrderObj = {
                 title: title.value,
-                beanId: beanId.value
+                beanVarietyId: beanId.value
             }
             order(newOrderObj);
         }
