@@ -17,10 +17,10 @@ export const VarietySelect = varietiesArray => {
     `
 }
 
-export const VarietySelectOrig = varietiesArray => {
+export const VarietySelectOrig = (varietiesArray, obj) => {
     return `
         <select class="dropdown" id="varietySelectorig">
-            <option value="0">Please select a Bean Variety</option>
+            <option value="${obj ? obj.beanVarietyId : 0}">Please select a Bean Variety</option>
             ${varietiesArray.map(
         vObj => {
             return `<option value="${vObj.id}">${vObj.name}</option>`;

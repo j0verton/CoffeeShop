@@ -9,7 +9,7 @@ export const CoffeeForm = (coffeeObj) => {
             <form id="addACoffee-form">
                 <input type="hidden" name="id" id="coffee-id" value="${coffeeObj.id}">
                 <input type="text" id="coffee-title" value="${coffeeObj.title}">${coffeeObj.name}</input>
-                ${VarietySelectOrig(varieties)}
+                ${VarietySelectOrig(varieties, coffeeObj)}
                 <button id="submitCoffee">Edit This Coffee</button>
             </form>
         </div>`

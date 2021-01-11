@@ -134,13 +134,11 @@ eventHub.addEventListener("click", e => {
             }
             editVariety(updateObj);
         } else {
-            debugger
             const newVarietyObj = {
                 name: name.value,
                 region: region.value,
                 notes: notes.value
             }
-            console.log(newVarietyObj)
             addVariety(newVarietyObj);
         }
     }

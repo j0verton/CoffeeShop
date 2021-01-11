@@ -40,7 +40,7 @@ export const deleteOrder = (id) => {
     return fetch(`${url}${id}`, {
         method: 'DELETE'
     })
-        .then(getAllBeanVarieties)
+        .then(getOrderHistory)
         .then(dispatchStateChangeEvent("delete"))
 }
 
@@ -52,7 +52,7 @@ export const editOrder = (coffeeObj) => {
         },
         body: JSON.stringify(coffeeObj)
     })
-        .then(getAllBeanVarieties)
+        .then(getOrderHistory)
         .then(dispatchStateChangeEvent("edit", coffeeObj.id))
 }
 

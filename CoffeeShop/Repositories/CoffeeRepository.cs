@@ -133,6 +133,7 @@ namespace CoffeeShop.Repositories
                          WHERE Id = @id";
                     cmd.Parameters.AddWithValue("@title", coffee.Title);
                     cmd.Parameters.AddWithValue("@beanvarietyid", coffee.BeanVarietyId);
+                    cmd.Parameters.AddWithValue("@id", coffee.Id);
 
                     cmd.ExecuteNonQuery();
                 }
